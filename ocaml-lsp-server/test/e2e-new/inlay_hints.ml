@@ -6,6 +6,7 @@ let apply_inlay_hints
       ?(hint_pattern_variables = false)
       ?(hint_let_bindings = false)
       ?hint_function_params
+      ?(hint_avoid_ghost_locations = false)
       ~source
       ()
   =
@@ -28,6 +29,7 @@ let apply_inlay_hints
   let regular_config =
     [ "hintPatternVariables", `Bool hint_pattern_variables
     ; "hintLetBindings", `Bool hint_let_bindings
+    ; "hintAvoidGhostLocations", `Bool hint_avoid_ghost_locations
     ]
     @
     match hint_function_params with
@@ -114,4 +116,16 @@ let%expect_test "function params (deactivated)" =
   let source = "let f a b c d = (a + b, c ^ string_of_bool d)" in
   apply_inlay_hints ~hint_function_params:false ~source ();
   [%expect {| let f a b c d = (a + b, c ^ string_of_bool d) |}]
+;;
+
+let%expect_test "avoid ghost locations" =
+  let source = "let f () = let y = 0 in y" in
+  apply_inlay_hints ~hint_avoid_ghost_locations:true ~hint_let_bindings:true ~source ();
+  [%expect {| let f () = let y$: int$ = 0 in y |}]
+;;
+
+let%expect_test "don't avoid ghost locations" =
+  let source = "let f () = let y = 0 in y" in
+  apply_inlay_hints ~hint_avoid_ghost_locations:false ~hint_let_bindings:true ~source ();
+  [%expect {| let f () = let y$: int$ = 0 in y |}]
 ;;

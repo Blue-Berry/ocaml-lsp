@@ -34,6 +34,12 @@ let compute (state : State.t) { InlayHintParams.range; textDocument = { uri }; _
           c.hint_function_params)
         |> Option.value ~default:false
       in
+      let _hint_avoid_ghost_locations =
+        Option.map state.configuration.data.inlay_hints ~f:(fun c ->
+(*           c.hint_avoid_ghost_locations) *)
+          true)
+        |> Option.value ~default:true
+      in
       Document.Merlin.with_pipeline_exn ~name:"inlay-hints" doc (fun pipeline ->
         let start = range.start |> Position.logical
         and stop = range.end_ |> Position.logical in
@@ -44,7 +50,8 @@ let compute (state : State.t) { InlayHintParams.range; textDocument = { uri }; _
             , hint_let_bindings
             , hint_pattern_variables
             , hint_function_params
-            , not inside_test )
+(*             , hint_avoid_ghost_locations ) *)
+            , true)
         in
         let hints = Query_commands.dispatch pipeline command in
         List.filter_map
