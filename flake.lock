@@ -18,23 +18,6 @@
         "type": "github"
       }
     },
-    "merlin5_1": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1727427299,
-        "narHash": "sha256-P9+3BPBWrulS/1r03CqMdicFcgEcLK1Gy7pCAcYt3n4=",
-        "owner": "ocaml",
-        "repo": "merlin",
-        "rev": "650a7865bc37a646250f7c52fa6644d9d4a5218b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ocaml",
-        "ref": "501",
-        "repo": "merlin",
-        "type": "github"
-      }
-    },
     "merlin5_2": {
       "flake": false,
       "locked": {
@@ -55,16 +38,15 @@
     "merlin5_3": {
       "flake": false,
       "locked": {
-        "lastModified": 1738348450,
-        "narHash": "sha256-jAyw6kck7h4hOsHsUrILZgGol+Q/1Tc37phA/D6W46c=",
-        "owner": "liam923",
+        "lastModified": 1745840795,
+        "narHash": "sha256-lUZ0VY7+PspdgZv2YuBKp/+iAd7aZy6XxdENrB5dmTM=",
+        "owner": "ocaml",
         "repo": "merlin",
-        "rev": "fdd0902d505b208f8c1f0c1c5e5c9b367dc65690",
+        "rev": "e4c66857ad64cc1cbd486fafc4a718f8e6b742ed",
         "type": "github"
       },
       "original": {
-        "owner": "liam923",
-        "ref": "rename-holes",
+        "owner": "ocaml",
         "repo": "merlin",
         "type": "github"
       }
@@ -106,7 +88,6 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "merlin5_1": "merlin5_1",
         "merlin5_2": "merlin5_2",
         "merlin5_3": "merlin5_3",
         "nixpkgs": "nixpkgs"

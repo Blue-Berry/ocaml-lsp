@@ -3,7 +3,7 @@
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:nix-ocaml/nix-overlays";
     merlin5_3 = {
-      url = "github:liam923/merlin/rename-holes";
+      url = "github:ocaml/merlin";
       flake = false;
     };
     merlin5_2 = {
@@ -140,7 +140,7 @@
         localPackages_5_3 = makeLocalPackages pkgs_5_3;
         devShell = localPackages: nixpkgs:
           nixpkgs.mkShell {
-            buildInputs = [ nixpkgs.ocamlPackages.utop ];
+            buildInputs = [ nixpkgs.ocamlPackages.utop localPackages.ocaml-lsp ];
             inputsFrom =
               builtins.map (x: x.overrideAttrs (p: n: { doCheck = true; }))
               (builtins.attrValues localPackages);
